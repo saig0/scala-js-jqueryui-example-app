@@ -12,6 +12,8 @@ trait JQueryUi extends JQuery {
   def draggable(options: js.Any): this.type = ???
 
   def droppable(options: js.Any): this.type = ???
+
+  def position(options: js.Any): this.type = ???
 }
 
 trait JQueryUiObject extends js.Object {

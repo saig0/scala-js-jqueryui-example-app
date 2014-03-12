@@ -2,14 +2,22 @@
 <html>
 	<head>
 		<title>Drag-And-Drop with Scala.js and jQueryUI</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
 		<h1>Drag-And-Drop with Scala.js and jQueryUI</h1>
 
 		<p>This example was made with <a href="http://www.scala-js.org/">Scala.js</a>, <a href="https://github.com/scala-js/scala-js-jquery/">Scala.js-jQuery</a> and <a href="jqueryui.com">jQueryUI</a> after a <a href="href="http://www.elated.com/articles/drag-and-drop-with-jquery-your-essential-guide/">jQueryUI Guide</a></p>
 		
-		
-		
+		<div id="content"> 
+			<div id="cardPile"> </div>
+		 	<div id="cardSlots"> </div> 
+		 	<div id="successMessage">
+    			<h2>You did it!</h2>
+    			<button id="resetButton">Play Again</button>
+  			</div>
+ 		</div>
+				
 		<!-- 3rd party JS must be before own JS -->
 		<script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
 		<script type="text/javascript"
