@@ -1,6 +1,7 @@
 package de.scalajs.example
 
 import scala.scalajs.js
+import scala.scalajs.js.JSApp
 import js.Dynamic.literal
 import org.scalajs.jquery._
 import de.scalajs.jqueryui.JQueryUi._
@@ -9,12 +10,10 @@ import de.scalajs.jqueryui._
 import scala.scalajs.js.annotation.JSExport
 import scala.util.Random
 
-@JSExport(name="DragAndDropExample")
-object DragAndDropExample {
+object DragAndDropExample extends JSApp {
 
   var correctCards = 0
 
-  @JSExport
   def main(): Unit = {
     // Restart game with button
     jQuery("#resetButton").click((_: JQueryEventObject) => main())
