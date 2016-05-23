@@ -1,15 +1,18 @@
 // Turn this project into a Scala.js project by importing these settings
-scalaJSSettings
+enablePlugins(ScalaJSPlugin)
 
 name := "Scala.js Example with jQueryUI"
 
-version := "0.1-SNAPSHOT"
+scalaVersion := "2.11.8"
 
-libraryDependencies ++= Seq(
-    "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test",
-	"org.scala-lang.modules.scalajs" %% "scalajs-jquery" % "0.1-SNAPSHOT"
-)
+version := "0.0.1"
 
-// Specify additional .js file to be passed to package-js and optimize-js
-unmanagedSources in (Compile, ScalaJSKeys.packageJS) +=
-    baseDirectory.value / "js" / "startup.js"
+libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.0"
+
+skip in packageJSDependencies := false
+
+//jsDependencies += "org.webjars" % "jquery" % "2.1.4" / "2.1.4/jquery.js"
+
+jsDependencies += "org.webjars" % "jquery" % "1.10.2" / "jquery.js"
+
+jsDependencies += "org.webjars" % "jquery-ui" % "1.11.4" / "jquery-ui.js" dependsOn "jquery.js"
