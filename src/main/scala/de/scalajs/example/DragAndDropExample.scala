@@ -1,22 +1,26 @@
 package de.scalajs.example
 
 import scala.scalajs.js
-import js.Dynamic.{ global => g, literal }
+import js.Dynamic.literal
 import org.scalajs.jquery._
 import de.scalajs.jqueryui.JQueryUi._
 import de.scalajs.jqueryui._
+
+import scala.scalajs.js.annotation.JSExport
 import scala.util.Random
 
+@JSExport(name="DragAndDropExample")
 object DragAndDropExample {
 
   var correctCards = 0
 
+  @JSExport
   def main(): Unit = {
     // Restart game with button
-    jQuery("#resetButton").click((_: JQueryEventObject) => main)
+    jQuery("#resetButton").click((_: JQueryEventObject) => main())
 
     // Hide the success message
-    jQuery("#successMessage").hide
+    jQuery("#successMessage").hide()
     jQuery("#successMessage").css(literal(
       left = "580px",
       top = "250px",
@@ -80,7 +84,7 @@ object DragAndDropExample {
     // If all the cards have been placed correctly then display a message
     // and reset the cards for another go
     if (correctCards == 10) {
-      jQuery("#successMessage").show
+      jQuery("#successMessage").show()
       jQuery("#successMessage").animate(literal(
         left = "380px",
         top = "200px",

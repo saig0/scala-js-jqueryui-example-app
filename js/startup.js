@@ -1,1 +1,0 @@
-ScalaJS.modules.de_scalajs_example_DragAndDropExample().main();
