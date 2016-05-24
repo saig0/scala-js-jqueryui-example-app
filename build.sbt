@@ -7,6 +7,33 @@ scalaVersion := "2.11.8"
 
 version := "1.0.0"
 
+
+def generateIndexTask(index: String, suffix: String) = Def.task {
+  val source = baseDirectory.value / "index-template.html"
+  val target = (crossTarget in Compile).value / index
+  val log = streams.value.log
+  IO.writeLines(target,
+    IO.readLines(source).map {
+      line => line.replace("{{opt}}", suffix)
+    }
+  )
+
+  log.info(s"Generate $index with suffix: $suffix")
+}
+
+def copyCss = Def.task {
+  val source = baseDirectory.value / "style.css"
+  val target = (crossTarget in Compile).value / "style.css"
+  IO.writeLines(target,
+    IO.readLines(source)
+  )
+
+}
+
+(fastOptJS in Compile) <<= (fastOptJS in Compile).dependsOn(generateIndexTask("index-dev.html","fastOpt"), copyCss)
+
+(fullOptJS in Compile) <<= (fullOptJS in Compile).dependsOn(generateIndexTask("index.html","opt"), copyCss)
+
 libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.0"
 
 skip in packageJSDependencies := false
