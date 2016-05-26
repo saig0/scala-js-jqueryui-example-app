@@ -18,7 +18,7 @@ def generateIndexTask(index: String, suffix: String) = Def.task {
     }
   )
 
-  log.info(s"Generate $index with suffix: $suffix")
+  log.info(s"Generate $index with suffix $suffix")
 }
 
 def copyCss = Def.task {
@@ -30,9 +30,13 @@ def copyCss = Def.task {
 
 }
 
-(fastOptJS in Compile) <<= (fastOptJS in Compile).dependsOn(generateIndexTask("index-dev.html","fastOpt"), copyCss)
-
-(fullOptJS in Compile) <<= (fullOptJS in Compile).dependsOn(generateIndexTask("index.html","opt"), copyCss)
+Seq(
+  (fastOptJS in Compile, "index-dev.html", "fastOpt"),
+  (fullOptJS in Compile, "index.html", "opt")
+).map {
+  case (task, indexHtml, postfix) =>
+    task <<= task.dependsOn(generateIndexTask(indexHtml, postfix), copyCss)
+}
 
 libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.9.0"
 
